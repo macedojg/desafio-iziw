@@ -23,7 +23,7 @@ const ServiceListing = () => {
   useEffect(() => {
     fetchServices();
   }, []);
-  console.log("services: ", services);
+  console.log("servicos: ", services);
   return (
     <div className="ui grid container">
       <ServiceComponent />

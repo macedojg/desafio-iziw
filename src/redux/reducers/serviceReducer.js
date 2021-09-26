@@ -18,7 +18,7 @@ export const selectedServiceReducer = (state = {}, { type, payload }) => {
     case ActionTypes.SELECTED_SERVICE:
       return { ...state, ...payload };
     case ActionTypes.REMOVE_SELECTED_SERVICE:
-      return {}; //return vazio = delete
+      return {};
     default:
       return state;
   }

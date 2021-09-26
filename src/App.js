@@ -1,6 +1,4 @@
 import "./App.css";
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Requests from "./components/Requests";
 import ServiceDetail from "./components/ServiceDetail";
 import ServiceListing from "./components/ServiceListing";
 import Login from "./components/login.component";
@@ -10,12 +8,8 @@ import { connect } from "react-redux";
 import { Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import Home from "./components/home";
-import Profile from "./components/profile";
-import BoardAdmin from "./components/board-admin";
-
 import { logout } from "./redux/actions/auth";
 import { clearMessage } from "./redux/actions/message";
-
 import { history } from "./helpers/history";
 
 class App extends Component {
@@ -24,35 +18,30 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
 
     this.state = {
-      showModeratorBoard: false,
-      showAdminBoard: false,
       currentUser: undefined,
     };
 
     history.listen((location) => {
-      props.dispatch(clearMessage()); // clear message when changing location
+      props.dispatch(clearMessage());
     });
   }
 
-  // componentDidMount() {
-  //   const user = this.props.user;
+  componentDidMount() {
+    const user = this.props.user;
 
-  //   if (user) {
-  //     this.setState({
-  //       currentUser: user,
-  //       // showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-  //       showAdminBoard: user.roles.includes("ROLE_ADMIN"),
-  //     });
-  //   }
-  // }
+    if (user) {
+      this.setState({
+        currentUser: user,
+      });
+    }
+  }
 
   logOut() {
     this.props.dispatch(logout());
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
-
+    const { currentUser } = this.state;
     return (
       <Router history={history}>
         <div>
@@ -66,39 +55,9 @@ class App extends Component {
                   Home
                 </Link>
               </li>
-
-              {/* {showModeratorBoard && (
-                <li className="nav-item">
-                  <Link to={"/mod"} className="nav-link">
-                    Moderator Board
-                  </Link>
-                </li>
-              )} */}
-
-              {showAdminBoard && (
-                <li className="nav-item">
-                  <Link to={"/admin"} className="nav-link">
-                    Admin Board
-                  </Link>
-                </li>
-              )}
-
-              {currentUser && (
-                <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    User
-                  </Link>
-                </li>
-              )}
             </div>
-
             {currentUser ? (
               <div className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link to={"/profile"} className="nav-link">
-                    {currentUser.username}
-                  </Link>
-                </li>
                 <li className="nav-item">
                   <a href="/login" className="nav-link" onClick={this.logOut}>
                     LogOut
@@ -112,26 +71,19 @@ class App extends Component {
                     Login
                   </Link>
                 </li>
-
-                {/* <li className="nav-item">
-                  <Link to={"/register"} className="nav-link">
-                    Sign Up
-                  </Link>
-                </li> */}
               </div>
             )}
           </nav>
-
           <div className="container mt-3">
             <Switch>
               <Route exact path={["/", "/home"]} component={Home} />
               <Route exact path="/login" component={Login} />
-              {/* <Route exact path="/register" component={Register} /> */}
-              {/* <Route exact path="/profile" component={Profile} /> */}
-              {/* <Route path="/user" component={BoardUser} /> */}
-              {/* <Route path="/mod" component={BoardModerator} /> */}
-              <Route path="/admin" component={BoardAdmin} />
               <Route exact path="/servicos" component={ServiceListing} />
+              <Route
+                path="/servicos/:serviceId"
+                exact
+                component={ServiceDetail}
+              />
             </Switch>
           </div>
         </div>

@@ -9,5 +9,3 @@ export default combineReducers({
   allServices: serviceReducer,
   service: selectedServiceReducer,
 });
-
-//  const reducersX = combineReducers

@@ -14,6 +14,13 @@ export const selectedService = (service) => {
   };
 };
 
+export const selectedQuestions = (questions) => {
+  return {
+    type: ActionTypes.SELECTED_QUESTIONS,
+    payload: questions,
+  };
+};
+
 export const removeSelectedService = () => {
   return {
     type: ActionTypes.REMOVE_SELECTED_SERVICE,

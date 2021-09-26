@@ -8,7 +8,7 @@ const ServiceComponent = () => {
     const { id, name, icon_path } = service;
     return (
       <div className="four wide column" key={id}>
-        <Link to={`/service/${id}`}>
+        <Link to={`/servicos/${id}`}>
           <div className="ui link cards">
             <div className="card">
               <div className="image">
@@ -16,8 +16,6 @@ const ServiceComponent = () => {
               </div>
               <div className="content">
                 <div className="header">{name}</div>
-                {/* <div className="meta price">$ {price}</div>
-                <div className="meta">{category}</div> */}
               </div>
             </div>
           </div>
