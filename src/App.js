@@ -56,6 +56,16 @@ class App extends Component {
                 </Link>
               </li>
             </div>
+            <div className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link
+                  to={currentUser ? "/servicos" : "/login"}
+                  className="nav-link"
+                >
+                  Servicos
+                </Link>
+              </li>
+            </div>
             {currentUser ? (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
