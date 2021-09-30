@@ -7,6 +7,7 @@ import {
   removeSelectedService,
 } from "../redux/actions/serviceActions";
 import authHeader from "../services/auth-header";
+import QuestionForm from "./QuestionForm";
 
 const API_URL = "https://api.iziw.com.br/api/servicos/";
 
@@ -20,9 +21,7 @@ const ServiceDetail = () => {
 
     dispatch(selectedService(response.data));
   };
-  const questions = JSON.stringify(
-    useSelector((state) => state.service.questions)
-  );
+  const questions = useSelector((state) => state.service.questions);
   useEffect(() => {
     if (serviceId && serviceId !== "") fetchServiceDetail();
     return () => {
@@ -31,7 +30,7 @@ const ServiceDetail = () => {
   }, [serviceId]);
   return (
     <div className="ui grid container">
-      <p>{questions}</p>
+      <QuestionForm />
     </div>
   );
 };
